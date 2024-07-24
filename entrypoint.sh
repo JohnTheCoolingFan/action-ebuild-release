@@ -58,6 +58,9 @@ ebuild_ver=$(get_ebuild_ver "${GITHUB_REF}")
 # Calculate overlay branch name
 overlay_branch="${INPUT_OVERLAY_BRANCH:-${ebuild_cat}/${ebuild_pkg}}"
 
+# Default overlay branch name
+default_overlay_branch=${INPUT_DEFAULT_BRANCH:-'master'}
+
 # Display our findings thus far
 echo "Located ebuild at ${ebuild_path}"
 echo "  in category ${ebuild_cat}"
@@ -112,7 +115,7 @@ git_push "${overlay_branch}"
 if [[ -n "${INPUT_AUTH_TOKEN}" ]]; then
 	title="Automated release of ${ebuild_cat}/${ebuild_pkg}"
 	msg="Automatically generated pull request to update overlay for release of ${ebuild_cat}/${ebuild_pkg}"
-	create_pull_request "${overlay_branch}" "master" "${title}" "${msg}" "false" 
+	create_pull_request "${overlay_branch}" "${default_overlay_branch}" "${title}" "${msg}" "false" 
 fi
 
 echo "------------------------------------------------------------------------------------------------------------------------"

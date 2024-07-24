@@ -13,6 +13,9 @@ inputs:
   overlay_branch:
     description: 'The repository branch to operate on. If none specified a topic branch named after the category/package will be used.'
     required: false
+  default_branch:
+    description: 'Name of teh default branch'
+    required: false
   package_only:
     description: 'This is a package only ebuild for upstream source code.'
     required: false
