@@ -18,8 +18,13 @@ inputs:
     required: false
     default: false
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-branding:
-  icon: 'package'
-  color: 'purple'
+  using: 'composite'
+  steps:
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+    - name: Run action entrypoint
+      run: entrypoint.sh
+      shell: bash
